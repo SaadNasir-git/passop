@@ -160,122 +160,11 @@ const Manager = () => {
                         <Image src={'/add.svg'} width={35} height={35} alt="add" />
                         <div className="font-bold text-white">Save</div>
                     </button>
-                    {passwords.length == 0 && !loading && <div className='mt-5 font-bold'>No Paswords to show</div>}
                     {loading && <div className="flex items-center justify-center">
                         <Loader />
                     </div>}
                     {passwords.length > 0 && (
-                        <div className="hidden md:block mt-6 rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-                            <div className="overflow-x-auto">
-                                <table className="min-w-full divide-y divide-gray-200">
-                                    <thead className="bg-green-600">
-                                        <tr>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                                Site
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                                Username
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                                Password
-                                            </th>
-                                            <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                                                {/* <span className="sr-only">Actions</span> */}
-                                                Actions
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody className="bg-white divide-y divide-gray-200">
-                                        {passwords.map((item) => (
-                                            <tr key={item.id} className="hover:bg-gray-50">
-                                                <td className="px-6 py-4 whitespace-nowrap">
-                                                    <div className="flex items-center">
-                                                        <a
-                                                            href={item.site.startsWith('http') ? item.site : `https://${item.site}`}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="text-blue-600 hover:text-blue-800 hover:underline font-medium"
-                                                        >
-                                                            {item.site.replace(/^https?:\/\//, '').split('/')[0]}
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap">
-                                                    <div className="flex items-center space-x-2">
-                                                        <span className="font-mono">{item.username}</span>
-                                                        <button
-                                                            onClick={() => handlecopy(item.username)}
-                                                            aria-label="Copy username"
-                                                            className="p-1 rounded hover:bg-gray-100 transition-colors"
-                                                        >
-                                                            <Image
-                                                                src="/copy.svg"
-                                                                alt=""
-                                                                width={16}
-                                                                height={16}
-                                                                className="opacity-70 hover:opacity-100 invert"
-                                                            />
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap">
-                                                    <div className="flex items-center space-x-2">
-                                                        <span className="font-mono tracking-wider">
-                                                            {item.password.replace(/./g, '•')}
-                                                        </span>
-                                                        <button
-                                                            onClick={() => handlecopy(item.password)}
-                                                            aria-label="Copy password"
-                                                            className="p-1 rounded hover:bg-gray-100 transition-colors"
-                                                        >
-                                                            <Image
-                                                                src="/copy.svg"
-                                                                alt=""
-                                                                width={16}
-                                                                height={16}
-                                                                className="opacity-70 hover:opacity-100 invert"
-                                                            />
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                    <div className="flex items-center justify-end space-x-4">
-                                                        <button
-                                                            onClick={() => handleedit(item.id)}
-                                                            aria-label="Edit password"
-                                                            className="text-gray-500 hover:text-green-600 transition-colors"
-                                                        >
-                                                            <Image
-                                                                src="/edit.svg"
-                                                                alt=""
-                                                                width={18}
-                                                                height={18}
-                                                                className='invert'
-                                                            />
-                                                        </button>
-                                                        <button
-                                                            onClick={() => handledel(item.id)}
-                                                            aria-label="Delete password"
-                                                            className="text-gray-500 hover:text-red-600 transition-colors"
-                                                        >
-                                                            <Image
-                                                                src="/del.svg"
-                                                                alt=""
-                                                                width={18}
-                                                                height={18}
-                                                            />
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    )}
-                    {passwords.length > 0 && (
-                        <div className="block md:hidden w-full mt-4 space-y-4">
+                        <div className="block w-full mt-4 space-y-4">
                             {passwords.map((item) => (
                                 <div key={item.id} className="w-full bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 relative">
                                     {/* Three dots menu button and dropdown */}
@@ -288,7 +177,7 @@ const Manager = () => {
                                                     // Toggle current menu
                                                     document.getElementById(`mobile-menu-${item.id}`).classList.toggle('hidden');
                                                 }}
-                                                className="p-2 rounded-full hover:bg-green-400 focus:outline-none overflow-hidden"
+                                                className="p-2 rounded-full cursor-pointer hover:bg-green-400 focus:outline-none overflow-hidden"
                                                 aria-label="Actions"
                                             >
                                                 <Image src={'menu.svg'} width={23} height={20} alt='edit'/>
@@ -367,7 +256,7 @@ const Manager = () => {
                                                 <button
                                                     onClick={() => handlecopy(item.username)}
                                                     aria-label="Copy username"
-                                                    className="ml-2 p-1 rounded hover:bg-gray-200 w-[30%]"
+                                                    className="ml-2 p-1 rounded w-[30%] flex justify-center"
                                                 >
                                                     <Image
                                                         src="/copy.svg"
@@ -386,13 +275,13 @@ const Manager = () => {
                                                 Password
                                             </div>
                                             <div className="w-2/3 p-3 bg-green-50 flex items-center justify-between">
-                                                <span className="font-mono tracking-wider h-5 overflow-hidden break-all w-[75%]">
+                                                <span className="font-mono tracking-wider h-5 overflow-hidden break-all w-[70%]">
                                                     {item.password.replace(/./g, '•')}
                                                 </span>
                                                 <button
                                                     onClick={() => handlecopy(item.password)}
                                                     aria-label="Copy password"
-                                                    className="ml-2 p-1 rounded hover:bg-gray-200 w-[25%]"
+                                                    className="ml-2 p-1 rounded w-[30%]  flex justify-center"
                                                 >
                                                     <Image
                                                         src="/copy.svg"
